@@ -272,6 +272,9 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': {
         IS_DEBUG_MODE,
+        REACT_APP_JODAER_SOURCE_URL: env.REACT_APP_JODAER_SOURCE_URL,
+        REACT_APP_JODAER_TERMS_URL: env.REACT_APP_JODAER_TERMS_URL,
+        REACT_APP_JODAER_PRIVACY_URL: env.REACT_APP_JODAER_PRIVACY_URL,
         IS_DEV_ENV: mode === 'development' ? 'true' : 'false',
       },
     },

@@ -1,41 +1,23 @@
-import { styled } from '@linaria/react';
-import { Trans, useLingui } from '@lingui/react/macro';
-
 import { useWorkspaceBypass } from '@/auth/sign-in-up/hooks/useWorkspaceBypass';
-import { getTwentyWebsiteUrl } from '@/auth/utils/getTwentyWebsiteUrl';
-import { useIsCurrentLocationOnAWorkspace } from '@/domain-manager/hooks/useIsCurrentLocationOnAWorkspace';
-import { ONBOARDING_CONTENT_BLOCK_WIDTH } from '@/onboarding/constants/OnboardingContentBlockWidth';
+import { styled } from '@linaria/react';
+import { Trans } from '@lingui/react/macro';
 import { themeCssVariables } from 'twenty-ui/theme';
-
-const StyledCopyContainer = styled.div`
-  align-items: center;
-  color: ${themeCssVariables.font.color.tertiary};
-  font-size: ${themeCssVariables.font.size.sm};
-  line-height: 1.4;
-  max-width: ${ONBOARDING_CONTENT_BLOCK_WIDTH}px;
-  text-align: center;
-
-  & > a {
-    color: ${themeCssVariables.font.color.tertiary};
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+import {
+  JODAER_PRIVACY_URL,
+  JODAER_SOURCE_URL,
+  JODAER_TERMS_URL,
+} from '~/config/jodaer';
 
 const StyledLinksContainer = styled.div`
   align-items: center;
   color: ${themeCssVariables.font.color.tertiary};
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   font-size: ${themeCssVariables.font.size.sm};
-  gap: ${themeCssVariables.spacing[2]};
+  gap: ${themeCssVariables.spacing[2]} ${themeCssVariables.spacing[4]};
   justify-content: center;
   max-width: 100%;
   text-align: center;
-  white-space: nowrap;
 
   & > a,
   & > button {
@@ -45,73 +27,33 @@ const StyledLinksContainer = styled.div`
     cursor: pointer;
     font: inherit;
     padding: 0;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    text-decoration: underline;
   }
-`;
-
-const StyledSeparator = styled.span`
-  color: ${themeCssVariables.font.color.tertiary};
 `;
 
 export const FooterNote = () => {
-  const { isOnAWorkspace } = useIsCurrentLocationOnAWorkspace();
-  const { i18n } = useLingui();
-
   const { shouldOfferBypass, shouldUseBypass, enableBypass } =
     useWorkspaceBypass();
-
-  if (!isOnAWorkspace) {
-    return (
-      <StyledCopyContainer>
-        <Trans>By using Twenty, you agree to the</Trans>{' '}
-        <a
-          href={getTwentyWebsiteUrl(i18n.locale, 'terms')}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Trans>Terms of Service</Trans>
-        </a>{' '}
-        <Trans>and</Trans>{' '}
-        <a
-          href={getTwentyWebsiteUrl(i18n.locale, 'privacy-policy')}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Trans>Privacy Policy</Trans>
-        </a>
-        .
-      </StyledCopyContainer>
-    );
-  }
 
   return (
     <StyledLinksContainer>
       {shouldOfferBypass && !shouldUseBypass && (
-        <>
-          <button type="button" onClick={enableBypass}>
-            <Trans>Bypass SSO</Trans>
-          </button>
-          <StyledSeparator>•</StyledSeparator>
-        </>
+        <button type="button" onClick={enableBypass}>
+          <Trans>Bypass SSO</Trans>
+        </button>
       )}
-      <a
-        href={getTwentyWebsiteUrl(i18n.locale, 'privacy-policy')}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Trans>Privacy Policy</Trans>
-      </a>
-      <StyledSeparator>•</StyledSeparator>
-      <a
-        href={getTwentyWebsiteUrl(i18n.locale, 'terms')}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Trans>Terms of Service</Trans>
+      {JODAER_PRIVACY_URL && (
+        <a href={JODAER_PRIVACY_URL} target="_blank" rel="noopener noreferrer">
+          <Trans>Privacy Policy</Trans>
+        </a>
+      )}
+      {JODAER_TERMS_URL && (
+        <a href={JODAER_TERMS_URL} target="_blank" rel="noopener noreferrer">
+          <Trans>Terms of Service</Trans>
+        </a>
+      )}
+      <a href={JODAER_SOURCE_URL} target="_blank" rel="noopener noreferrer">
+        <Trans>Source code</Trans>
       </a>
     </StyledLinksContainer>
   );

@@ -1,16 +1,11 @@
-import { type I18n } from '@lingui/core';
 import { Font, Head } from 'react-email';
 
 import { canvasTheme } from 'src/common-style';
 
-type BaseHeadProps = {
-  i18n: I18n;
-};
-
-export const BaseHead = ({ i18n }: BaseHeadProps) => {
+export const BaseHead = () => {
   return (
     <Head>
-      <title>{i18n._('Twenty email')}</title>
+      <title>JODAER CRM</title>
       <Font
         fontFamily={canvasTheme.font.family}
         fallbackFontFamily="sans-serif"

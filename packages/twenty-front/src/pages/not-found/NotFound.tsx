@@ -17,6 +17,7 @@ import { PageTitle } from '@/ui/utilities/page-title/components/PageTitle';
 import { styled } from '@linaria/react';
 import { MainButton } from 'twenty-ui/components/input';
 import { themeCssVariables } from 'twenty-ui/theme';
+import { JODAER_PRODUCT_NAME } from '~/config/jodaer';
 
 const StyledBackDrop = styled.div`
   align-items: center;
@@ -42,7 +43,7 @@ export const NotFound = () => {
 
   return (
     <>
-      <PageTitle title={t`Page Not Found | Twenty`} />
+      <PageTitle title={t`Page Not Found | ${JODAER_PRODUCT_NAME}`} />
       <StyledBackDrop>
         <ErrorState.Root>
           <AnimatedPlaceholder type="error404" />

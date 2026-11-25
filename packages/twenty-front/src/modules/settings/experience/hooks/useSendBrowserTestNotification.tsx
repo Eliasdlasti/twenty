@@ -1,6 +1,7 @@
 import { useLingui } from '@lingui/react/macro';
 import { useToast } from 'twenty-ui/components/feedback';
 import { Button } from 'twenty-ui/primitives/input';
+import { JODAER_APP_ICON_PATH } from '~/config/jodaer';
 
 import { openInboxNotificationsHelp } from '@/settings/experience/utils/openInboxNotificationsHelp';
 import { useSubscribeToWebPushNotifications } from '@/web-push/hooks/useSubscribeToWebPushNotifications';
@@ -36,7 +37,7 @@ export const useSendBrowserTestNotification = () => {
 
     await registration.showNotification(t`Notifications are on`, {
       body: t`New inbox messages will show up like this`,
-      icon: '/images/icons/android/android-launchericon-192-192.png',
+      icon: JODAER_APP_ICON_PATH,
     });
 
     return true;

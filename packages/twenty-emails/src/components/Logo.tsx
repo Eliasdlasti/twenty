@@ -1,22 +1,26 @@
-import { type I18n } from '@lingui/core';
-import { Img } from 'react-email';
+import { Img, Text } from 'react-email';
 
 const logoStyle = {
   marginBottom: '40px',
 };
 
-type LogoProps = {
-  i18n: I18n;
-};
+export const Logo = () => {
+  const serverUrl = process.env.SERVER_URL;
+  const wordmarkPath = '/images/jodaer/wordmark.png';
+  const wordmarkUrl =
+    serverUrl && URL.canParse(wordmarkPath, serverUrl)
+      ? new URL(wordmarkPath, serverUrl).href
+      : undefined;
 
-export const Logo = ({ i18n }: LogoProps) => {
-  return (
+  return wordmarkUrl ? (
     <Img
-      src="https://app.twenty.com/images/icons/windows11/Square150x150Logo.scale-100.png"
-      alt={i18n._('Twenty logo')}
-      width="40"
-      height="40"
+      src={wordmarkUrl}
+      alt="JODAER CRM"
+      width="174"
+      height="36"
       style={logoStyle}
     />
+  ) : (
+    <Text style={logoStyle}>JODAER CRM</Text>
   );
 };

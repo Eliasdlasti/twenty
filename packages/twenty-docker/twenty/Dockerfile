@@ -73,6 +73,10 @@ RUN yarn workspaces focus --production twenty-emails twenty-shared twenty-client
 
 FROM front-deps AS twenty-front-build
 
+ARG REACT_APP_JODAER_SOURCE_URL
+ARG REACT_APP_JODAER_TERMS_URL
+ARG REACT_APP_JODAER_PRIVACY_URL
+
 COPY ./packages/twenty-front /app/packages/twenty-front
 COPY ./packages/twenty-front-component-renderer /app/packages/twenty-front-component-renderer
 COPY ./packages/twenty-ui /app/packages/twenty-ui
