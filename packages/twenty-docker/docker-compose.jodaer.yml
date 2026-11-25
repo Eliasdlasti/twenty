@@ -1,0 +1,29 @@
+name: jodaer-crm
+
+x-jodaer-environment: &jodaer-environment
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY}
+  SERVER_URL: ${SERVER_URL:?Set the public HTTPS CRM URL}
+  IS_BILLING_ENABLED: 'false'
+  TELEMETRY_ENABLED: 'false'
+  EMAIL_DRIVER: ${EMAIL_DRIVER:-logger}
+  EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-JODAER CRM}
+  EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-noreply@example.com}
+  EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-}
+  EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-587}
+  EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-}
+  EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
+
+services:
+  server:
+    image: ${JODAER_IMAGE:?Set JODAER_IMAGE to the branded image tag or digest}
+    ports: !override
+      - '127.0.0.1:${JODAER_HTTP_PORT:-3000}:3000'
+    environment: *jodaer-environment
+
+  worker:
+    image: ${JODAER_IMAGE:?Set JODAER_IMAGE to the branded image tag or digest}
+    environment: *jodaer-environment
+
+  db:
+    environment:
+      POSTGRES_PASSWORD: ${PG_DATABASE_PASSWORD:?Set PG_DATABASE_PASSWORD}

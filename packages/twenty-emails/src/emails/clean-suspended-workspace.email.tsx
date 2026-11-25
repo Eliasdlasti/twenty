@@ -1,6 +1,5 @@
 import { Trans } from '@lingui/react';
 import { BaseEmail } from 'src/components/BaseEmail';
-import { CallToAction } from 'src/components/CallToAction';
 import { MainText } from 'src/components/MainText';
 import { Title } from 'src/components/Title';
 import { createI18nInstance } from 'src/utils/i18n.utils';
@@ -40,17 +39,7 @@ export const CleanSuspendedWorkspaceEmail = ({
         <br />
         <br />
         <Trans id="Its data has been removed and can no longer be recovered." />
-        <br />
-        <br />
-        <Trans id="If you'd ever like to give Twenty another try, you can start a fresh workspace in minutes — we'd love to have you back." />
       </MainText>
-      <br />
-      <CallToAction
-        href="https://app.twenty.com/"
-        value={i18n._('Start a new workspace')}
-      />
-      <br />
-      <br />
     </BaseEmail>
   );
 };
